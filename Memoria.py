@@ -15,9 +15,14 @@ from turtle import *
 from freegames import path
 
 car = path('car.gif')
-tiles = list(range(32)) * 2
+tiles = list((' 0', ' 1',' 2',' 3', ' 4',' 5',' 6',' 7',' 8',' 9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31'))  * 2
+
+'Para el punto 4 decidimos cambiar los numeros por letras, si se quiere hacer asi solo cambiar el # al de numeros'
+#tiles = list((' a',' b',' c',' d',' e',' f',' g',' h',' i',' j',' k',' l',' n',' m',' o',' p',' q',' r',' s',' t',' u',' w',' x',' y',' z',' *',' /',' +',' -', ' #',' %',' &'))*2
+
 state = {'mark': None}
 hide = [True] * 64
+counter=0
 
 def square(x, y):
     "Draw white square with black outline at (x, y)."
@@ -41,15 +46,20 @@ def xy(count):
 
 def tap(x, y):
     "Update mark and hidden tiles based on tap."
+    global counter
+    counter += 1
+    print(counter)
     spot = index(x, y)
     mark = state['mark']
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
-        state['mark'] = spot
+        state['mark'] = spot 
+        
     else:
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+
 
 def draw():
     "Draw image and tiles."
